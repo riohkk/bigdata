@@ -1,0 +1,40 @@
+!pip3 install bs4
+from bs4 import BeautifulSoup
+import requests
+import pandas as pd
+#template colab
+import plotly
+import plotly.io as pio
+pio.renderers.default = 'colab'
+
+#template visualisasi interactive
+import pandas as pd
+import plotly.graph_objs as go
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot #plot in ofline
+init_notebook_mode(connected=True)
+%load_ext cudf.pandas
+%%time
+import pandas as pd
+df = pd.read_csv("your file")#excel = pd.read_excel and this is for twcs.csv
+df
+df.author_id.unique()
+df.describe()
+#scatter plot
+#variable name is up to you
+data = go.Scatter(
+    x=df.tweet_id,
+    y=df.response_tweet_id,
+    mode="markers",
+    name="response_tweet_id Vs tweet_id"
+)
+
+fig = go.Figure(data=data)
+# Create the Figure object fig
+# --- Adding Labels ---
+fig.update_layout( title="response_tweet_id vs. tweet_id Analysis",
+# Add a title to the chart
+xaxis_title="tweet_id",
+# Label for the x-axis
+yaxis_title="response_tweet_id") # Label for the y-axis )
+# Display the figure in Google Colab fig.show(renderer="colab")
+fig.show(renderer="colab")
